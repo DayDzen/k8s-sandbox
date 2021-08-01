@@ -8,7 +8,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", printHostname)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 }
 
 func printHostname(w http.ResponseWriter, r *http.Request) {
