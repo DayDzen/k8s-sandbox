@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-sandbox-deployment
+  labels:
+    app: k8s-sandbox
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-sandbox
+  template:
+    metadata:
+      labels:
+        app: k8s-sandbox
+    spec:
+      containers:
+      - name: k8s-sandbox
+        image: daydz3n/k8s-sandbox:0.1.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-sandbox-service
+spec:
+  type: NodePort
+  selector:
+    app: k8s-sandbox
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 80
+    nodePort: 30001
